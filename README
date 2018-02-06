@@ -1,0 +1,10 @@
+* How to use it
+This code is for Python 3.
+python3 pos.py
+
+* Feature
+1.put the price at the first input box.
+2.click "Add".
+3.if you want to discount, please put the percent at the second box.
+4.if it's done, please click "OK"
+5.result is shown. receipt is available in the terminal and "receipt.txt"
