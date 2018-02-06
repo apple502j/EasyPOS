@@ -24,7 +24,7 @@ import datetime
 
 root=ti.Tk()
 root.title("TK POS")
-root.geometry("480x360")
+root.geometry("360x240")
 
 TAX=0
 #Tax: If it doesn't exist, put 0
