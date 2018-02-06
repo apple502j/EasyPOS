@@ -152,9 +152,13 @@ showbtn = ti.Button(text="OK",width=5)
 showbtn.bind("<Button-1>",showResult)
 showbtn.place(x=10,y=150)
 
-showbtn = ti.Button(text="Credits",width=20)
+showbtn = ti.Button(text="Credits",width=10)
 showbtn.bind("<Button-1>",showCredits)
 showbtn.place(x=80,y=150)
+
+quitbtn = ti.Button(text="Exit",width=10)
+quitbtn.bind("<Button-1>",quit)
+quitbtn.place(x=180,y=150)
 
 # end TKInter
 if __name__=="__main__":
