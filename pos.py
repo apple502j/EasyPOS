@@ -1,3 +1,4 @@
+#usr/bin/python3
 import tkinter as ti
 from math import ceil
 import tkinter.messagebox as tm
@@ -32,6 +33,7 @@ TAX=0
 POS_FIRST="Example Shop"
 POS_ADD="{y} yen, bought."
 POS_DISCOUNT="{p} percent, discount. {y} yen."
+POS_DISCOUNT2="{d} yen, discount. {y} yen."
 POS_TAX="{p} percent tax."
 POS_DONE="Done:{y} yen, {i} items."
 
@@ -76,6 +78,22 @@ def discountLast(ev):
         receipt.append(POS_DISCOUNT.format(p=str(dpInteger),y=bought[lastNum]))
     except ValueError:
         pass
+
+def discountYen(ev):
+    try:
+        if len(bought) == 0:
+            return
+        dp=discountByYen.get()
+        if dp == "":
+            return
+        if dp[0] == "-":
+            return
+        dpInteger=int(dp)
+        lastNum=len(bought)-1
+        bought[lastNum] = bought[lastNum] - dpInteger
+        receipt.append(POS_DISCOUNT2.format(d=str(dpInteger),y=bought[lastNum]))
+    except ValueError:
+        pass
 def showResult(ev):
     global bought
     try:
@@ -98,12 +116,25 @@ def showResult(ev):
     finally:
         bought=[]
 
+def showCredits(ev):
+    tm.showinfo('Credits','''
+    EasyPOS v1.1
+    
+    (C) 2018 Apple502j All rights reserved.
+    This program is licensed under GPLv3 as a "libre software".
+    You may obtain the source at https://github.com/apple502j/EasyPOS
+    ''')
+
 money = ti.Entry(width=10)
 money.place(x=10,y=10)
 
 discount = ti.Entry(width=10)
 discount.place(x=10,y=50)
 discount.insert(ti.END,"0")
+
+discountByYen = ti.Entry(width=10)
+discountByYen.place(x=10,y=100)
+discountByYen.insert(ti.END,"0")
 
 addbtn = ti.Button(text="Add",width=10)
 addbtn.bind("<Button-1>",buyOne)
@@ -113,9 +144,17 @@ disbtn = ti.Button(text="% Discount",width=25)
 disbtn.bind("<Button-1>",discountLast)
 disbtn.place(x=100,y=50)
 
-showbtn = ti.Button(text="OK",width=10)
+disbtn = ti.Button(text="yen Discount",width=25)
+disbtn.bind("<Button-1>",discountYen)
+disbtn.place(x=100,y=100)
+
+showbtn = ti.Button(text="OK",width=5)
 showbtn.bind("<Button-1>",showResult)
-showbtn.place(x=10,y=100)
+showbtn.place(x=10,y=150)
+
+showbtn = ti.Button(text="Credits",width=20)
+showbtn.bind("<Button-1>",showCredits)
+showbtn.place(x=80,y=150)
 
 # end TKInter
 if __name__=="__main__":
