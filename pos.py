@@ -124,7 +124,7 @@ def showResult(ev):
 
 def showCredits(ev):
     tm.showinfo('Credits','''
-    EasyPOS v1.1
+    EasyPOS v1.3
     
     (C) 2018 Apple502j All rights reserved.
     This program is licensed under GPLv3 as a "libre software".
