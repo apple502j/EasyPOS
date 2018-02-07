@@ -24,7 +24,7 @@ import datetime
 # settings
 
 root=ti.Tk()
-root.title("TK POS")
+root.title("EasyPOS")
 root.geometry("360x240")
 
 TAX=0
