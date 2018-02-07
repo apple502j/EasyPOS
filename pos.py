@@ -28,7 +28,7 @@ root.title("TK POS")
 root.geometry("360x240")
 
 TAX=0
-#Tax: If it doesn't exist, put 0
+#Default Tax: If it doesn't exist, put 0
 
 POS_FIRST="Example Shop"
 POS_ADD="{y} yen, bought."
@@ -102,8 +102,14 @@ def showResult(ev):
             allThings=0
         else:
             allThings=sum(bought)
-            allThings=allThings * (1+TAX)
-            receipt.append(POS_TAX.format(p=str(TAX)))
+            taxData=taxBox.get()
+            taxInteger=0
+            if taxData == "":
+                taxInteger=0
+            else:
+                taxInteger=int(taxData) / 100.0
+            allThings=ceil(allThings * (1+taxInteger))
+            receipt.append(POS_TAX.format(p=str(taxInteger)))
         tm.showinfo('Done',"{m} yen, {i} items.".format(m=allThings,i=count))
         receipt.append(POS_DONE.format(y=str(allThings),i=str(count)))
         dt=datetime.datetime.now().strftime('%Y/%m/%d (%A) %H:%M')
@@ -135,6 +141,13 @@ discount.insert(ti.END,"0")
 discountByYen = ti.Entry(width=10)
 discountByYen.place(x=10,y=100)
 discountByYen.insert(ti.END,"0")
+
+taxBox = ti.Entry(width=10)
+taxBox.place(x=10,y=200)
+taxBox.insert(ti.END,str(TAX))
+
+taxText = ti.Label(text="% tax")
+taxText.place(x=80,y=200)
 
 addbtn = ti.Button(text="Add",width=10)
 addbtn.bind("<Button-1>",buyOne)
